@@ -1,7 +1,6 @@
 package dao;
 
 import model.Car;
-
 import java.util.List;
 
 public interface DAO {
