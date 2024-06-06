@@ -3,7 +3,6 @@ package config;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -35,14 +34,13 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
     //метод, который регистрирует фильтр для установки кодировки символов
     @Override
     public void onStartup(ServletContext aServletContext) throws ServletException {
+
         super.onStartup(aServletContext);
         FilterRegistration.Dynamic encodingFilter = aServletContext.addFilter("encodingFilter", new CharacterEncodingFilter());
         encodingFilter.setInitParameter("encoding", "UTF-8");
         encodingFilter.setInitParameter("forceEncoding", "true");
         encodingFilter.addMappingForUrlPatterns(null, true, "/*");
         aServletContext.addFilter("hiddenHttpMethodFilter", new HiddenHttpMethodFilter()) //добавление фильтра, который передаст запрос в нужный метод контроллера
-               .addMappingForUrlPatterns(null, true, "/*");
+                .addMappingForUrlPatterns(null, true, "/*");
     }
-
-
 }

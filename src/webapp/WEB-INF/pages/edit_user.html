@@ -1,25 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Edit user</title>
+    <title>Create new user</title>
 </head>
 <body>
-<form th:action="@{/users/edit}" th:object="${user}" method="POST">
-    <input name="id" th:field="*{id}" th:value="${user.id}" hidden="hidden">
-    <label for="name">Name</label>
-    <input type="text" id="name" th:field="*{name}" th:value="${user.name}" required>
-    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
-    </br>
-    <label for="email">Email</label>
-    <input type="text" id="email" th:field="*{email}" th:value="${user.email}" required>
-    <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name error</div>
-    </br>
-    <label for="age">Age</label>
-    <input type="text" id="age" th:field="*{age}" th:value="${user.age}" required>
-    <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Name error</div>
-    </br>
-    <button type="submit">update user</button>
+<h3>Update</h3>
+<form th:method="PATCH" th:action="@{/users/update}" th:object="${user}">
+    <input type="hidden" th:field="*{id}"/>
+    <label for="name">Name: </label>
+    <input type="text" th:field="*{name}" id="name">
+    <br/>
+    <br/>
+    <label for="email">email: </label>
+    <input type="text" th:field="*{email}" id="email">
+    <br/>
+    <br/>
+    <label for="age">Age: </label>
+    <input type="text" th:field="*{age}" id="age">
+    <br/>
+    <hr/>
+    <input type="submit" value="Update user">
 </form>
 </body>
+</html>

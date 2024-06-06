@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>All users</title>
+    <title>Users</title>
 </head>
 <body>
-<h2>Users</h2>
+<h1>Users</h1>
 <table>
     <thead>
     <tr>
@@ -14,29 +13,27 @@
         <th>Name</th>
         <th>Email</th>
         <th>Age</th>
+        <th>Operations</th>
     </tr>
     </thead>
     <tbody>
-    <tr var="user" items="${users}">
     <tr th:each="user : ${users}">
-        <td th:text="${user.id}"></td>
-        <td th:text="${user.name}"></td>
-        <td th:text="${user.email}"></td>
-        <td th:text="${user.age}"></td>
+        <td th:text="${user.getId()}"></td>
+        <td th:text="${user.getName()}"></td>
+        <td th:text="${user.getEmail()}"></td>
+        <td th:text="${user.getAge()}"></td>
         <td>
-            <form th:action="@{/users/edit}">
-                <button type="submit" th:name="id" th:value="${user.id}">Edit</button>
+            <a th:href="@{/users/update(id=${user.getId()})}">Update</a>
+
+            <form th:method="DELETE" th:action="@{/users(id=${user.getId()})}">
+                <input type="submit" value="Delete">
             </form>
         </td>
-        <td>
-            <form method="post" th:action="@{/users/delete}">
-                <button type="submit" th:name="id" th:value="${user.id}">Delete</button>
-            </form>
-        </td>
-    </tr>
     </tr>
     </tbody>
 </table>
-<a href="/users/new">Create new user</a>
+<br/>
+<hr/>
+<input type="button" value="Create new user" onclick="window.location.href='/users/new'">
 </body>
 </html>
